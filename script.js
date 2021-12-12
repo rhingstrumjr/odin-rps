@@ -28,24 +28,27 @@ const computerPlay = function () {
 const game = {
     humanScore: 0,
     compScore: 0,
+    message: "Choose to start round 1 - first to 5 wins!",
     playRound(selection) {
         const computerSelection = computerPlay();
         if (computerSelection == selection) {
-            return "Tie!"
+            this.message = "Tie!"
         }
-        if (selection == 'rock' && computerSelection == 'scissors') {
+        else if ((selection == 'rock' && computerSelection == 'scissors') ||
+                (selection == 'scissors' && computerSelection == 'paper') ||
+                (selection == 'paper' && computerSelection == 'rock')) {
             this.humanScore++
-            return "You win!"
+            this.message = "You win!"
+        } else {
+            this.compScore++
+            this.message = "Computer wins"
         }
-        if (selection == 'scissors' && computerSelection == 'paper') {
-            this.humanScore++
-            return "You win!"
-        }
-        if (selection == 'paper' && computerSelection == 'rock') {
-            this.humanScore++
-            return "You win!"
-        }
-        this.compScore++
-        return "Computer wins"
+        this.updateScoreboard()
+        
+    },
+    updateScoreboard() {
+        document.getElementById("userscore").innerText = this.humanScore;
+        document.getElementById("compscore").innerText = this.compScore;
+        document.getElementById("message").innerText = this.message;
     }
 }
