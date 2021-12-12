@@ -33,15 +33,15 @@ const game = {
         if (computerSelection == selection) {
             return "Tie!"
         }
-        if (selection == 'rock' && cPlay == 'scissors') {
+        if (selection == 'rock' && computerSelection == 'scissors') {
             this.humanScore++
             return "You win!"
         }
-        if (selection == 'scissors' && cPlay == 'paper') {
+        if (selection == 'scissors' && computerSelection == 'paper') {
             this.humanScore++
             return "You win!"
         }
-        if (selection == 'paper' && cPlay == 'rock') {
+        if (selection == 'paper' && computerSelection == 'rock') {
             this.humanScore++
             return "You win!"
         }
