@@ -1,7 +1,6 @@
 const computerPlay = function () {
     const options = ['rock', 'paper', 'scissors']
     const random = Math.floor(Math.random() * 3)
-    console.log("computer selected:", options[random])
     return options[random]
 }
 
@@ -29,6 +28,22 @@ const game = {
     updateScoreboard() {
         document.getElementById("userscore").innerText = this.humanScore;
         document.getElementById("compscore").innerText = this.compScore;
-        document.getElementById("message").innerText = this.message;
+        if (this.humanScore === 5) {
+            document.getElementById("message").innerText = `You won ${this.humanScore} rounds to ${this.compScore} rounds!`;
+            setTimeout(this.startNewGame(), 2000)
+        } else if ( this.compScore === 5) {
+            document.getElementById("message").innerText = `You lost ${this.humanScore} rounds to ${this.compScore} rounds.`;
+            setTimeout(this.startNewGame(), 2000)
+        } else {
+            document.getElementById("message").innerText = this.message;
+        }
+    },
+    startNewGame () {
+        return function() {
+            game.message = "Starting a new game - click to begin!";
+            document.getElementById("message").innerText = game.message;
+            game.humanScore = 0;
+            game.compScore = 0;
+        }
     }
 }
